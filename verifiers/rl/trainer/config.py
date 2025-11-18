@@ -272,6 +272,12 @@ class RLConfig(TrainingArguments):
         default=True,
         metadata={"help": "Whether to shuffle the training dataset."},
     )
+    use_liger_kernel: bool = field(
+        default=True,
+        metadata={
+            "help": "Whether enable Liger Kernel for LLM model training. It can effectively increase multi-GPU training throughput by ~20% and reduces memory usage by ~60%, works out of the box with flash attention, PyTorch FSDP, and Microsoft DeepSpeed. Currently, it supports llama, mistral, mixtral and gemma models."
+        },
+    )
 
     def __post_init__(self):
         # configure output dir

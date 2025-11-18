@@ -52,7 +52,9 @@ class RLTrainer(Trainer):
         # model + tokenizer
         if isinstance(model, str):
             model_name = model
-            model, processing_class = vf.get_model_and_tokenizer(model)
+            model, processing_class = vf.get_model_and_tokenizer(
+                model, use_liger=args.use_liger_kernel
+            )
         else:
             model_name = model.config._name_or_path
         assert isinstance(model, PreTrainedModel)
