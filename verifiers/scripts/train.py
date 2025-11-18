@@ -32,7 +32,9 @@ def main():
     env_args = config["env"].get("args", {})
     env = vf.load_environment(env_id=env_id, **env_args)
     rl_config = vf.RLConfig(**config["trainer"].get("args", {}))
-    trainer = vf.RLTrainer(model=model, env=env, args=rl_config)
+    trainer = vf.RLTrainer(
+        model=model, env=env, args=rl_config, model_kwargs=config.get("model_kwargs")
+    )
     trainer.train()
 
 

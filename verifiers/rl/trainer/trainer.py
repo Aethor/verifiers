@@ -45,6 +45,7 @@ class RLTrainer(Trainer):
         env: vf.Environment,
         args: RLConfig,
         processing_class: Optional[PreTrainedTokenizerBase] = None,
+        model_kwargs: dict[str, Any] | None = None,
         **kwargs,
     ):
         self.logger = logging.getLogger(__name__)
@@ -53,7 +54,7 @@ class RLTrainer(Trainer):
         if isinstance(model, str):
             model_name = model
             model, processing_class = vf.get_model_and_tokenizer(
-                model, use_liger=args.use_liger_kernel
+                model, use_liger=args.use_liger_kernel, model_kwargs=model_kwargs
             )
         else:
             model_name = model.config._name_or_path
